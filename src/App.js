@@ -11,8 +11,8 @@ function useMouse(){
   useEffect(() => {
     function handle(e){
       setMousePosition({
-        x: e.pageX,
-        y: e.pageY
+        x: e.pageX
+        // y: e.pageY
       })
     }
     document.addEventListener("mousemove", handle)
@@ -32,7 +32,7 @@ function App() {
 
   let oscX = {
     type: "sine",
-    frequency: 200,
+    frequency: useMouse(),
     playing: false
   }
 
@@ -76,6 +76,12 @@ function App() {
     playX()
   }
 
+  function changeFreq(){
+    playX()
+    oscX.frequency = useMouse
+    playX()
+  }
+
   return (
     <div className="App">
       <button onClick={playX}>play</button>
@@ -83,7 +89,7 @@ function App() {
       <button onClick={changeSine}>sine</button>
       <button onClick={changeSawtooth}>sawtooth</button>
       <button onClick={changeTriangle}>triangle</button>
-
+      <div id="test-area" onMouseMove={changeFreq}></div>
       <p>Mouse X is: {x}</p>
       <p>Mouse Y is: {y}</p>
 
