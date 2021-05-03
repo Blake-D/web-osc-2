@@ -1,7 +1,32 @@
 import './App.css'
-// import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import ReactDOM from "react-dom"
+
+function useMouse(){
+  const [mousePosition, setMousePosition] = useState({
+    x: null,
+    y: null
+  })
+
+  useEffect(() => {
+    function handle(e){
+      setMousePosition({
+        x: e.pageX,
+        y: e.pageY
+      })
+    }
+    document.addEventListener("mousemove", handle)
+    return () => document.removeEventListener("mousemove", handle)
+  })
+
+  return mousePosition
+
+}
+
 
 function App() {
+
+  const {x, y} = useMouse()
 
   var oscillatorX
 
@@ -58,6 +83,10 @@ function App() {
       <button onClick={changeSine}>sine</button>
       <button onClick={changeSawtooth}>sawtooth</button>
       <button onClick={changeTriangle}>triangle</button>
+
+      <p>Mouse X is: {x}</p>
+      <p>Mouse Y is: {y}</p>
+
     </div>
   )
 }
