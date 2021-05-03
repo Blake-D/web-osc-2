@@ -1,4 +1,5 @@
 import './App.css'
+// import React, { useState } from 'react'
 
 function App() {
 
@@ -26,9 +27,16 @@ function App() {
     }
   }
 
+  function changeTypeX(){
+    playX()
+    oscX.type = "square"
+    playX()
+  }
+
   return (
     <div className="App">
       <button onClick={playX}>play</button>
+      <button onClick={changeTypeX}>square</button>
     </div>
   )
 }
