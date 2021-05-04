@@ -3,69 +3,55 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
 
-  // function useMouse(){
-  //   const [mousePosition, setMousePosition] = useState({
-  //     x: null,
-  //     y: null
-  //   })
+  const useMousePosition = () => {
+    const [mousePosition, setMousePosition] = useState({ x: null, y: null });
   
-  //   useEffect(() => {
-  //     function handle(e){
-  //       setMousePosition({
-  //         x: e.pageX,
-  //         y: e.pageY
-  //       })
-  //     }
-  //     document.addEventListener("mousemove", handle)
-  //     return () => document.removeEventListener("mousemove", handle)
-  //   })
-  //   return mousePosition
-  // }
+    const updateMousePosition = ev => {
+      setMousePosition({ x: ev.clientX, y: ev.clientY });
+    };
+  
+    useEffect(() => {
+      window.addEventListener("mousemove", updateMousePosition);
+  
+      return () => window.removeEventListener("mousemove", updateMousePosition);
+    }, []);
+  
+    return mousePosition;
+  };
 
-  // const {x, y} = useMouse()
+  const {x,y} = useMousePosition()
 
   var oscillatorX
 
-  // const [oscX, setOscX] = useState({
-  //   type: "sine",
-  //   frequency: 200,
-  //   playing: false
-  // })
-
   let oscX = {
     type: "sine",
-    frequency: 200,
+    frequency: x,
     playing: false
-  }
-
-
-  function stopX(){
-    oscillatorX.stop()
   }
 
   const audioContext = new AudioContext()
 
-  function playX(){
-    if(oscX.playing === false){
-      oscX.playing = true
+  function PlayX(){
+    if(oscX.playing){
+      oscillatorX.stop()
+      oscX.playing = false
+    } else{
       oscillatorX = audioContext.createOscillator()
       oscillatorX.type = oscX.type
       oscillatorX.frequency.setValueAtTime(oscX.frequency, audioContext.currentTime)
       oscillatorX.connect(audioContext.destination)
       oscillatorX.start()
-    } else if(oscX.playing === true){
-      oscX.playing = false
-      stopX()
+      oscX.playing = true
     }
   }
 
+  window.addEventListener("mousedown", PlayX)
+  window.addEventListener("mouseup", PlayX)
 
   return (
     <div className="App">
-      <div id="test-area" onClick={playX}></div>
-      {/* <button onClick={up100}>click me</button> */}
-      {/* <p>Mouse X is: {x}</p>
-      <p>Mouse Y is: {y}</p> */}
+      <div id="test-area"></div>
+      <p>X is: {x}</p>
     </div>
   )
 }
