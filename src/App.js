@@ -2,29 +2,46 @@ import './App.css'
 import React, { useState, useEffect } from 'react'
 import ReactDOM from "react-dom"
 
-function useMouse(){
-  const [mousePosition, setMousePosition] = useState({
-    x: null,
-    y: null
-  })
+// function useMouse(){
+//   const [mousePosition, setMousePosition] = useState({
+//     x: null,
+//     y: null
+//   })
 
-  useEffect(() => {
-    function handle(e){
-      setMousePosition({
-        x: e.pageX
-        // y: e.pageY
-      })
-    }
-    document.addEventListener("mousemove", handle)
-    return () => document.removeEventListener("mousemove", handle)
-  })
-
-  return mousePosition
-
-}
+//   useEffect(() => {
+//     function handle(e){
+//       setMousePosition({
+//         x: e.pageX,
+//         y: e.pageY
+//       })
+//     }
+//     document.addEventListener("mousemove", handle)
+//     return () => document.removeEventListener("mousemove", handle)
+//   })
+//   return mousePosition
+// }
 
 
 function App() {
+
+  function useMouse(){
+    const [mousePosition, setMousePosition] = useState({
+      x: null,
+      y: null
+    })
+  
+    useEffect(() => {
+      function handle(e){
+        setMousePosition({
+          x: e.pageX,
+          y: e.pageY
+        })
+      }
+      document.addEventListener("mousemove", handle)
+      return () => document.removeEventListener("mousemove", handle)
+    })
+    return mousePosition
+  }
 
   const {x, y} = useMouse()
 
@@ -32,7 +49,7 @@ function App() {
 
   let oscX = {
     type: "sine",
-    frequency: useMouse(),
+    frequency: 200,
     playing: false
   }
 
@@ -42,6 +59,7 @@ function App() {
     if(oscX.playing){
       oscillatorX.stop()
       oscX.playing = false
+      console.log(oscX.playing)
     } else{
       oscillatorX = audioContext.createOscillator()
       oscillatorX.type = oscX.type
@@ -49,6 +67,7 @@ function App() {
       oscillatorX.connect(audioContext.destination)
       oscillatorX.start()
       oscX.playing = true
+      console.log(oscX.playing)
     }
   }
 
@@ -76,23 +95,23 @@ function App() {
     playX()
   }
 
-  function changeFreq(){
-    playX()
-    oscX.frequency = useMouse
-    playX()
-  }
+  // function changeFreq(){
+  //   playX()
+  //   oscX.frequency = x
+  //   playX()
+  // }
 
   return (
     <div className="App">
-      <button onClick={playX}>play</button>
+      {/* <button onClick={playX}>play</button> */}
       <button onClick={changeSquare}>square</button>
       <button onClick={changeSine}>sine</button>
       <button onClick={changeSawtooth}>sawtooth</button>
       <button onClick={changeTriangle}>triangle</button>
-      <div id="test-area" onMouseMove={changeFreq}></div>
+      {/* <div id="test-area" onMouseMove={changeFreq}></div> */}
+      <div id="test-area" onMouseDown={playX}></div>
       <p>Mouse X is: {x}</p>
       <p>Mouse Y is: {y}</p>
-
     </div>
   )
 }
