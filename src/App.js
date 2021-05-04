@@ -26,59 +26,44 @@ function App() {
 
   var oscillatorX
 
+  // const [oscX, setOscX] = useState({
+  //   type: "sine",
+  //   frequency: 200,
+  //   playing: false
+  // })
+
   let oscX = {
     type: "sine",
     frequency: 200,
     playing: false
   }
 
-  var audioContext = new AudioContext()
-
-  function playX(){
-    oscillatorX = audioContext.createOscillator()
-    oscillatorX.type = oscX.type
-    oscillatorX.frequency.setValueAtTime(oscX.frequency, audioContext.currentTime)
-    oscillatorX.connect(audioContext.destination)
-    oscillatorX.start()
-  }
 
   function stopX(){
     oscillatorX.stop()
   }
 
-  function changeSquare(){
-    playX()
-    oscX.type = "square"
-    playX()
+  const audioContext = new AudioContext()
+
+  function playX(){
+    if(oscX.playing === false){
+      oscX.playing = true
+      oscillatorX = audioContext.createOscillator()
+      oscillatorX.type = oscX.type
+      oscillatorX.frequency.setValueAtTime(oscX.frequency, audioContext.currentTime)
+      oscillatorX.connect(audioContext.destination)
+      oscillatorX.start()
+    } else if(oscX.playing === true){
+      oscX.playing = false
+      stopX()
+    }
   }
 
-  function changeSine(){
-    playX()
-    oscX.type = "sine"
-    playX()
-  }
-
-  function changeSawtooth(){
-    playX()
-    oscX.type = "sawtooth"
-    playX()
-  }
-
-  function changeTriangle(){
-    playX()
-    oscX.type = "triangle"
-    playX()
-  }
 
   return (
     <div className="App">
-      {/* <button onClick={playX}>play</button> */}
-      <button onClick={changeSquare}>square</button>
-      <button onClick={changeSine}>sine</button>
-      <button onClick={changeSawtooth}>sawtooth</button>
-      <button onClick={changeTriangle}>triangle</button>
-      {/* <div id="test-area" onMouseMove={changeFreq}></div> */}
-      <div id="test-area" onMouseDown={playX} onMouseUp={stopX}></div>
+      <div id="test-area" onClick={playX}></div>
+      {/* <button onClick={up100}>click me</button> */}
       {/* <p>Mouse X is: {x}</p>
       <p>Mouse Y is: {y}</p> */}
     </div>
