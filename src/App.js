@@ -22,7 +22,7 @@ function App() {
 
   var audioContext = new AudioContext()
 
-  let twoDee = false
+  let poly = false
 
   window.onload = function () {
     playX = function () {
@@ -68,7 +68,7 @@ function App() {
 
     function changeFreq() {
       oscX.frequency = x
-      if(twoDee === true){
+      if(poly === true){
         oscY.frequency = y
       } else{
         oscY.frequency = oscX.frequency * 1.01
@@ -86,11 +86,13 @@ function App() {
     })
   }
 
-  function changeTwoDee(){
-    if(twoDee === false){
-      twoDee = true
+  function changePoly(){
+    if(poly === false){
+      poly = true
+      document.getElementById('combo-setting').innerText = "setting: poly"
     } else{
-      twoDee = false
+      poly = false
+      document.getElementById('combo-setting').innerText = "setting: mono"
     }
   }
 
@@ -110,14 +112,20 @@ function App() {
     oscX.type = "sawtooth"
   }
 
+  function printWaveType(){
+    document.getElementById('wave-type').innerText = "wave type: " + oscX.type
+  }
+
   return (
     <div className="App">
       <div id="control-panel">
-        <button id="sine-button" onClick={changeSine}>sine</button>
-        <button id="triangle-button" onClick={changeTriangle}>triangle</button>
-        <button id="square-button" onClick={changeSquare}>square</button>
-        <button id="sawtooth-button" onClick={changeSawtooth}>sawtooth</button>
-        <button id="oneDee-button" onClick={changeTwoDee}>1D/2D</button>
+        <button id="sine-button" onClick={function(e){changeSine(); printWaveType()}}>sine</button>
+        <button id="triangle-button" onClick={function(e){changeTriangle(); printWaveType()}}>triangle</button>
+        <button id="square-button" onClick={function(e){changeSquare(); printWaveType()}}>square</button>
+        <button id="sawtooth-button" onClick={function(e){changeSawtooth(); printWaveType()}}>sawtooth</button>
+        <button id="oneDee-button" onClick={changePoly}>mono/poly</button>
+        <div id="wave-type">wave type: sine</div>
+        <div id="combo-setting">setting: mono</div>
       </div>
       <div id="test-area"></div>
     </div>
