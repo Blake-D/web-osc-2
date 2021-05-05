@@ -7,8 +7,8 @@ function App() {
       oscillatorX
 
   let oscX = { // primary oscillator for all possible combos, frequency is tied to X-axis
-    type: "sawtooth",
-    frequency: 200,
+    type: "sine",
+    frequency: 20,
     playing: false
   }
 
@@ -76,8 +76,30 @@ function App() {
     // })
   }
 
+  function changeSine(){
+    oscX.type = "sine"
+  }
+
+  function changeTriangle(){
+    oscX.type = "triangle"
+  }
+
+  function changeSquare(){
+    oscX.type = "square"
+  }
+
+  function changeSawtooth(){
+    oscX.type = "sawtooth"
+  }
+
   return (
     <div className="App">
+      <div id="control-panel">
+        <button id="sine-button" onClick={changeSine}>sine</button>
+        <button id="triangle-button" onClick={changeTriangle}>triangle</button>
+        <button id="square-button" onClick={changeSquare}>square</button>
+        <button id="sawtooth-button" onClick={changeSawtooth}>sawtooth</button>
+      </div>
       <div id="test-area"></div>
     </div>
   )
