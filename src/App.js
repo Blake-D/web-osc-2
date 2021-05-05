@@ -56,12 +56,12 @@ function App() {
     let x = null
     let y = null
 
-    document.getElementById("test-area").addEventListener('mousedown', () => {
+    document.getElementById("grid").addEventListener('mousedown', () => {
       playX()
       playY()
     })
 
-    document.getElementById("test-area").addEventListener('mouseup', () => {
+    document.getElementById("grid").addEventListener('mouseup', () => {
       playX()
       playY()
     })
@@ -75,7 +75,7 @@ function App() {
       }
     }
 
-    document.getElementById("test-area").addEventListener('mousemove', (e) => {
+    document.getElementById("grid").addEventListener('mousemove', (e) => {
       x = e.clientX
       y = e.clientY
       changeFreq()
@@ -127,7 +127,7 @@ function App() {
         <div id="wave-type">wave type: sine</div>
         <div id="combo-setting">setting: mono</div>
       </div>
-      <div id="test-area"></div>
+      <div id="grid"></div>
     </div>
   )
 }
