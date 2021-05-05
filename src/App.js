@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react'
 function App() {
 
   var playX,
-      oscillatorX
+      playY,
+      oscillatorX,
+      oscillatorY
 
   let oscX = { // primary oscillator for all possible combos, frequency is tied to X-axis
     type: "sine",
@@ -12,23 +14,17 @@ function App() {
     playing: false
   }
 
-  // var oscY = { // Y-axis osc if 2D is selected
-  //     type: "sine",
-  //     frequency: 20,
-  //     playing: false
-  // }
-
-  // var oscX2 = { // harmonizing osc in 1D, linked to X-axis
-  //     type: "sine",
-  //     frequency: 20,
-  //     playing: false
-  // }
+  let oscY = {
+    type: oscX.type,
+    frequency: 20,
+    playing: false
+  }
 
   var audioContext = new AudioContext()
 
   window.onload = function () {
     playX = function () {
-      if (oscX.playing) { // stops the primary osc if it's already playing
+      if(oscX.playing) { // stops the primary osc if it's already playing
         oscillatorX.stop()
         oscX.playing = false
       } else { //otherwise generates and starts it
@@ -41,6 +37,20 @@ function App() {
       }
     }
 
+    playY = function () {
+      if(oscY.playing) {
+        oscillatorY.stop()
+        oscY.playing = false
+      } else {
+        oscillatorY = audioContext.createOscillator()
+        oscillatorY.type = oscX.type
+        oscillatorY.frequency.setValueAtTime(oscY.frequency, audioContext.currentTime)
+        oscillatorY.connect(audioContext.destination)
+        oscillatorY.start()
+        oscY.playing = true
+      }
+    }
+
     // determines the state of the mouse (down or up). the mousemove event listener below can only call the changeFreq functions if mouseState is true
     // let mouseState = false
     let x = null
@@ -48,23 +58,28 @@ function App() {
 
     document.getElementById("test-area").addEventListener('mousedown', () => {
       playX()
+      playY()
     })
 
     document.getElementById("test-area").addEventListener('mouseup', () => {
       playX()
+      playY()
     })
 
-    function changeFreqX() {
-      oscX.frequency = x // changes the primary osc frequency
+    function changeFreq() {
+      oscX.frequency = x
+      oscY.frequency = y
     }
 
     // grabs the mouse's x and y coordinates and uses them to inform the changeFreq functions
     document.getElementById("test-area").addEventListener('mousemove', (e) => {
       x = e.clientX
       y = e.clientY
-      changeFreqX()
+      changeFreq()
       playX()
       playX()
+      playY()
+      playY()
     })
 
     // document.getElementById("test-area").addEventListener('mousemove', () => { // calls the changeFreq functions if mouse is down
