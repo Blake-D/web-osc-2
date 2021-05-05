@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
       oscillatorX,
       oscillatorY
 
-  let oscX = { // primary oscillator for all possible combos, frequency is tied to X-axis
+  let oscX = {
     type: "sine",
     frequency: 20,
     playing: false
@@ -22,12 +22,14 @@ function App() {
 
   var audioContext = new AudioContext()
 
+  let twoDee = false
+
   window.onload = function () {
     playX = function () {
-      if(oscX.playing) { // stops the primary osc if it's already playing
+      if(oscX.playing) { 
         oscillatorX.stop()
         oscX.playing = false
-      } else { //otherwise generates and starts it
+      } else {
         oscillatorX = audioContext.createOscillator()
         oscillatorX.type = oscX.type
         oscillatorX.frequency.setValueAtTime(oscX.frequency, audioContext.currentTime)
@@ -51,8 +53,6 @@ function App() {
       }
     }
 
-    // determines the state of the mouse (down or up). the mousemove event listener below can only call the changeFreq functions if mouseState is true
-    // let mouseState = false
     let x = null
     let y = null
 
@@ -68,10 +68,13 @@ function App() {
 
     function changeFreq() {
       oscX.frequency = x
-      oscY.frequency = y
+      if(twoDee === true){
+        oscY.frequency = y
+      } else{
+        oscY.frequency = oscX.frequency * 1.01
+      }
     }
 
-    // grabs the mouse's x and y coordinates and uses them to inform the changeFreq functions
     document.getElementById("test-area").addEventListener('mousemove', (e) => {
       x = e.clientX
       y = e.clientY
@@ -81,14 +84,14 @@ function App() {
       playY()
       playY()
     })
+  }
 
-    // document.getElementById("test-area").addEventListener('mousemove', () => { // calls the changeFreq functions if mouse is down
-    //   if (mouseState = true) {
-    //     // changeFreqX()
-    //     playX()
-    //     playX()
-    //   }
-    // })
+  function changeTwoDee(){
+    if(twoDee === false){
+      twoDee = true
+    } else{
+      twoDee = false
+    }
   }
 
   function changeSine(){
@@ -114,6 +117,7 @@ function App() {
         <button id="triangle-button" onClick={changeTriangle}>triangle</button>
         <button id="square-button" onClick={changeSquare}>square</button>
         <button id="sawtooth-button" onClick={changeSawtooth}>sawtooth</button>
+        <button id="oneDee-button" onClick={changeTwoDee}>1D/2D</button>
       </div>
       <div id="test-area"></div>
     </div>
