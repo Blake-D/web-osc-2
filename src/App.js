@@ -89,10 +89,10 @@ function App() {
   function changePoly(){
     if(poly === false){
       poly = true
-      document.getElementById('combo-setting').innerText = "setting: poly"
+      document.getElementById('combo-setting').innerText = "POLY"
     } else{
       poly = false
-      document.getElementById('combo-setting').innerText = "setting: mono"
+      document.getElementById('combo-setting').innerText = "MONO"
     }
   }
 
@@ -113,19 +113,27 @@ function App() {
   }
 
   function printWaveType(){
-    document.getElementById('wave-type').innerText = "wave type: " + oscX.type
+    document.getElementById('wave-type').innerText = oscX.type.toUpperCase()
   }
 
   return (
     <div className="App">
-      <div id="control-panel">
+      <div id="button-panel">
         <button id="oneDee-button" onClick={changePoly}>mono/poly</button><br></br>
         <button id="sine-button" onClick={function(e){changeSine(); printWaveType()}}>sine</button>
         <button id="triangle-button" onClick={function(e){changeTriangle(); printWaveType()}}>triangle</button>
         <button id="square-button" onClick={function(e){changeSquare(); printWaveType()}}>square</button>
         <button id="sawtooth-button" onClick={function(e){changeSawtooth(); printWaveType()}}>sawtooth</button>
-        <div id="wave-type">wave type: sine</div>
-        <div id="combo-setting">setting: mono</div>
+      </div>
+      <div id="settings-display">
+        <div id="type-display">
+          <p className="left">wave type: </p>
+          <p id="wave-type">SINE</p>
+        </div>
+        <div>
+          <p className="left">setting: </p>
+          <p id="combo-setting">MONO</p>
+        </div>
       </div>
       <div id="grid"></div>
     </div>
