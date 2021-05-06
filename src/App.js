@@ -130,7 +130,7 @@ function App() {
           <p className="left">wave type: </p>
           <p id="wave-type">SINE</p>
         </div>
-        <div>
+        <div id="poly-display">
           <p className="left">setting: </p>
           <p id="combo-setting">MONO</p>
         </div>
