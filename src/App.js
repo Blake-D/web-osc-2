@@ -4,9 +4,9 @@ import React from 'react'
 function App() {
 
   var playX,
-      playY,
-      oscillatorX,
-      oscillatorY
+    playY,
+    oscillatorX,
+    oscillatorY
 
   let oscX = {
     type: "sine",
@@ -26,7 +26,7 @@ function App() {
 
   window.onload = function () {
     playX = function () {
-      if(oscX.playing) { 
+      if (oscX.playing) {
         oscillatorX.stop()
         oscX.playing = false
       } else {
@@ -40,7 +40,7 @@ function App() {
     }
 
     playY = function () {
-      if(oscY.playing) {
+      if (oscY.playing) {
         oscillatorY.stop()
         oscY.playing = false
       } else {
@@ -58,9 +58,9 @@ function App() {
 
     function changeFreq() {
       oscX.frequency = x
-      if(poly === true){
+      if (poly === true) {
         oscY.frequency = y
-      } else{
+      } else {
         oscY.frequency = oscX.frequency * 1.01
       }
     }
@@ -84,35 +84,77 @@ function App() {
       playY()
       playY()
     })
+
+    var canvas = document.getElementById('canvas')
+    var ctx = canvas.getContext('2d')
+    var i = 4,
+      j = 4,
+      speed = 1,
+      isBottom = false
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = 'greenyellow'
+      ctx.lineCap = 'round'
+      ctx.shadowBlur = 50
+      ctx.shadowColor = '#greenyellow'
+      ctx.fillRect(i, j, 290, .5)
+
+      if (!isBottom && j < canvas.height - 14) {
+        j += speed
+      } else if (j === canvas.height - 14) {
+        isBottom = true
+      }
+
+      if (isBottom && j > 4) {
+        j -= speed;
+      } else if (j === 4) {
+        isBottom = false
+      }
+      requestAnimationFrame(draw)
+    }
+
+    function stopDraw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      requestAnimationFrame(stopDraw)
+    }
+
+    document.getElementById("grid").addEventListener('mousedown', () => {
+      draw()
+    })
+
+    document.getElementById("grid").addEventListener('mouseup', () => {
+      stopDraw()
+    })
   }
 
-  function changePoly(){
-    if(poly === false){
+  function changePoly() {
+    if (poly === false) {
       poly = true
       document.getElementById('combo-setting').innerText = "POLY"
-    } else{
+    } else {
       poly = false
       document.getElementById('combo-setting').innerText = "MONO"
     }
   }
 
-  function changeSine(){
+  function changeSine() {
     oscX.type = "sine"
   }
 
-  function changeTriangle(){
+  function changeTriangle() {
     oscX.type = "triangle"
   }
 
-  function changeSquare(){
+  function changeSquare() {
     oscX.type = "square"
   }
 
-  function changeSawtooth(){
+  function changeSawtooth() {
     oscX.type = "sawtooth"
   }
 
-  function printWaveType(){
+  function printWaveType() {
     document.getElementById('wave-type').innerText = oscX.type.toUpperCase()
   }
 
@@ -120,10 +162,10 @@ function App() {
     <div className="App">
       <div id="button-panel">
         <button id="oneDee-button" onClick={changePoly}>mono/poly</button><br></br>
-        <button id="sine-button" onClick={function(e){changeSine(); printWaveType()}}>sine</button>
-        <button id="triangle-button" onClick={function(e){changeTriangle(); printWaveType()}}>triangle</button>
-        <button id="square-button" onClick={function(e){changeSquare(); printWaveType()}}>square</button>
-        <button id="sawtooth-button" onClick={function(e){changeSawtooth(); printWaveType()}}>sawtooth</button>
+        <button id="sine-button" onClick={function (e) { changeSine(); printWaveType() }}>sine</button>
+        <button id="triangle-button" onClick={function (e) { changeTriangle(); printWaveType() }}>triangle</button>
+        <button id="square-button" onClick={function (e) { changeSquare(); printWaveType() }}>square</button>
+        <button id="sawtooth-button" onClick={function (e) { changeSawtooth(); printWaveType() }}>sawtooth</button>
       </div>
       <div id="settings-display">
         <div id="type-display">
@@ -135,7 +177,9 @@ function App() {
           <p id="combo-setting">MONO</p>
         </div>
       </div>
-      <div id="grid"></div>
+      <div id="grid">
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
   )
 }
