@@ -10,29 +10,29 @@ p{
 button{
     background-color: green;
     font-family: 'Press Start 2P', monospace;
-    font-size: 2vh;
-    height: 4vh;
+    font-size: 2vmin;
+    height: 4vmin;
     width: auto;
-    margin: 2vh 1vw 0vh 0vw;
+    margin: 2vmin 1vmin 0vmin 0vmin;
 }
 
 #button-panel{
     color: greenyellow;
-    font-size: 3vh;
+    font-size: 3vmin;
     text-align: left;
     height: 12vh;
 }
 
 #settings-display{
-    margin: 2vh 0vw 0vh 0vw;
+    margin: 2vmin 0vmin 0vmin 0vmin;
     color: greenyellow;
-    font-size: 3vh;
+    font-size: 3vmin;
     text-align: left;
     height: 8vh;
 }
 
 #type-display{
-    margin: 2vh 0vw 0vh 0vw;
+    margin: 2vmin 0vmin 0vmin 0vmin;
 }
 
 #grid{
