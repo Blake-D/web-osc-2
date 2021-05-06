@@ -119,25 +119,27 @@ function App() {
 
   return (
     <div className="App">
-      <div id="button-panel">
-        <button id="oneDee-button" onClick={changePoly}>mono/poly</button><br></br>
-        <button id="sine-button" onClick={function (e) { changeSine(); printWaveType() }}>sine</button>
-        <button id="triangle-button" onClick={function (e) { changeTriangle(); printWaveType() }}>triangle</button>
-        <button id="square-button" onClick={function (e) { changeSquare(); printWaveType() }}>square</button>
-        <button id="sawtooth-button" onClick={function (e) { changeSawtooth(); printWaveType() }}>sawtooth</button>
-      </div>
-      <div id="settings-display">
-        <div id="poly-display">
-          <p className="left">setting: </p>
-          <p id="combo-setting">MONO</p>
+      <div id="top-wrap">
+        <div id="button-panel">
+          <button id="oneDee-button" onClick={changePoly}>mono/poly</button><br></br>
+          <button id="sine-button" onClick={function (e) { changeSine(); printWaveType() }}>sine</button>
+          <button id="triangle-button" onClick={function (e) { changeTriangle(); printWaveType() }}>triangle</button>
+          <button id="square-button" onClick={function (e) { changeSquare(); printWaveType() }}>square</button>
+          <button id="sawtooth-button" onClick={function (e) { changeSawtooth(); printWaveType() }}>sawtooth</button>
         </div>
-        <div id="type-display">
-          <p className="left">wave type: </p>
-          <p id="wave-type">SINE</p>
+        <div id="settings-display">
+          <div id="poly-display">
+            <p className="left">setting: </p>
+            <p id="combo-setting">MONO</p>
+          </div>
+          <div id="type-display">
+            <p className="left">wave type: </p>
+            <p id="wave-type">SINE</p>
+          </div>
         </div>
       </div>
       <div id="grid">
-        <p id="instructions">(click the grid to begin)</p>
+        <p id="instructions">(click and drag cursor across the grid to play)</p>
       </div>
     </div>
   )

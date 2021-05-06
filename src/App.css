@@ -25,6 +25,7 @@ button{
 
 #settings-display{
     margin: 2vmin 0vmin 0vmin 0vmin;
+    padding: 0vmin 0vmin 2vmin 0vmin;
     color: greenyellow;
     font-size: 3vmin;
     text-align: left;
@@ -37,9 +38,9 @@ button{
 
 #grid{
     color: white;
-    margin: 2vmin 0vmin 0vmin 0vmin;
+    padding: 2vmin 0vmin 0vmin 0vmin;
     width: 99.5vw;
-    height: 75vh;
+    height: 73vh;
     background: url('./images/scan_grid.jpeg');
     background-position: center;
     border-style: solid;
@@ -63,4 +64,8 @@ button{
 
 .left{
     float: left;
+}
+
+#top-wrap{
+    background: url('./images/circuit.jpeg');
 }
