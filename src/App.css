@@ -1,5 +1,9 @@
-#test-area{
-    border: solid black;
-    height: 100vh;
+#grid{
     width: 100vw;
+    height: 90vh;
+    background: url('./images/scan_grid.jpeg');
+    background-position: center;
+    border-style: solid;
+    border-color: greenyellow;
+    touch-action: none;
 }
