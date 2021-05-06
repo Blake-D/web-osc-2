@@ -1,6 +1,20 @@
+button{
+    font-family: 'Press Start 2P', monospace;
+    /* margin-top: 2vh; */
+}
+
+#control-panel{
+    background-color: black;
+    color: greenyellow;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    width: 100vw;
+    height: 20vh;
+}
+
 #grid{
     width: 100vw;
-    height: 90vh;
+    height: 80vh;
     background: url('./images/scan_grid.jpeg');
     background-position: center;
     border-style: solid;

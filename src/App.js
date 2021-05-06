@@ -56,6 +56,15 @@ function App() {
     let x = null
     let y = null
 
+    function changeFreq() {
+      oscX.frequency = x
+      if(poly === true){
+        oscY.frequency = y
+      } else{
+        oscY.frequency = oscX.frequency * 1.01
+      }
+    }
+
     document.getElementById("grid").addEventListener('mousedown', () => {
       playX()
       playY()
@@ -65,15 +74,6 @@ function App() {
       playX()
       playY()
     })
-
-    function changeFreq() {
-      oscX.frequency = x
-      if(poly === true){
-        oscY.frequency = y
-      } else{
-        oscY.frequency = oscX.frequency * 1.01
-      }
-    }
 
     document.getElementById("grid").addEventListener('mousemove', (e) => {
       x = e.clientX
@@ -119,11 +119,11 @@ function App() {
   return (
     <div className="App">
       <div id="control-panel">
+        <button id="oneDee-button" onClick={changePoly}>mono/poly</button><br></br>
         <button id="sine-button" onClick={function(e){changeSine(); printWaveType()}}>sine</button>
         <button id="triangle-button" onClick={function(e){changeTriangle(); printWaveType()}}>triangle</button>
         <button id="square-button" onClick={function(e){changeSquare(); printWaveType()}}>square</button>
         <button id="sawtooth-button" onClick={function(e){changeSawtooth(); printWaveType()}}>sawtooth</button>
-        <button id="oneDee-button" onClick={changePoly}>mono/poly</button>
         <div id="wave-type">wave type: sine</div>
         <div id="combo-setting">setting: mono</div>
       </div>
