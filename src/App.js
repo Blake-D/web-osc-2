@@ -66,6 +66,7 @@ function App() {
     }
 
     document.getElementById("grid").addEventListener('mousedown', () => {
+      document.getElementById("instructions").innerText = ""
       playX()
       playY()
     })
@@ -83,48 +84,6 @@ function App() {
       playX()
       playY()
       playY()
-    })
-
-    var canvas = document.getElementById('canvas')
-    var ctx = canvas.getContext('2d')
-    var i = 4,
-      j = 4,
-      speed = 1,
-      isBottom = false
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.fillStyle = 'greenyellow'
-      ctx.lineCap = 'round'
-      ctx.shadowBlur = 50
-      ctx.shadowColor = '#greenyellow'
-      ctx.fillRect(i, j, 290, .5)
-
-      if (!isBottom && j < canvas.height - 14) {
-        j += speed
-      } else if (j === canvas.height - 14) {
-        isBottom = true
-      }
-
-      if (isBottom && j > 4) {
-        j -= speed;
-      } else if (j === 4) {
-        isBottom = false
-      }
-      requestAnimationFrame(draw)
-    }
-
-    function stopDraw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      requestAnimationFrame(stopDraw)
-    }
-
-    document.getElementById("grid").addEventListener('mousedown', () => {
-      draw()
-    })
-
-    document.getElementById("grid").addEventListener('mouseup', () => {
-      stopDraw()
     })
   }
 
@@ -168,17 +127,17 @@ function App() {
         <button id="sawtooth-button" onClick={function (e) { changeSawtooth(); printWaveType() }}>sawtooth</button>
       </div>
       <div id="settings-display">
-        <div id="type-display">
-          <p className="left">wave type: </p>
-          <p id="wave-type">SINE</p>
-        </div>
         <div id="poly-display">
           <p className="left">setting: </p>
           <p id="combo-setting">MONO</p>
         </div>
+        <div id="type-display">
+          <p className="left">wave type: </p>
+          <p id="wave-type">SINE</p>
+        </div>
       </div>
       <div id="grid">
-        <canvas id="canvas"></canvas>
+        <p id="instructions">(click the grid to begin)</p>
       </div>
     </div>
   )

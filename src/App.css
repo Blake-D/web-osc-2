@@ -1,4 +1,5 @@
 body{
+    font-family: 'Press Start 2P', monospace;
     background-color: black;
 }
 
@@ -7,35 +8,35 @@ p{
 }
 
 button{
+    background-color: green;
     font-family: 'Press Start 2P', monospace;
-    font-size: 2vmin;
-    height: 4vmin;
+    font-size: 2vh;
+    height: 4vh;
     width: auto;
-    margin: 2vmin 1vmin 0vmin 0vmin;
+    margin: 2vh 1vw 0vh 0vw;
 }
 
 #button-panel{
     color: greenyellow;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 3vmin;
+    font-size: 3vh;
     text-align: left;
     height: 12vh;
 }
 
 #settings-display{
-    margin: 2vmin 0vmin 0vmin 0vmin;
+    margin: 2vh 0vw 0vh 0vw;
     color: greenyellow;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 3vmin;
+    font-size: 3vh;
     text-align: left;
     height: 8vh;
 }
 
-#poly-display{
-    margin: 2vmin 0vmin 0vmin 0vmin;
+#type-display{
+    margin: 2vh 0vw 0vh 0vw;
 }
 
 #grid{
+    color: white;
     margin: 2vmin 0vmin 0vmin 0vmin;
     width: 99.5vw;
     height: 75vh;
@@ -44,14 +45,22 @@ button{
     border-style: solid;
     border-color: greenyellow;
     touch-action: none;
+    text-align: center;
 }
+
+#instructions{
+    font-size: 3vmin;
+    margin-top: 10vh;
+    color: greenyellow;
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 .left{
     float: left;
-}
-
-canvas{
-    /* border: 1px solid #d3d3d3; */
-    width: 100%;
-    height: 100%;
 }
