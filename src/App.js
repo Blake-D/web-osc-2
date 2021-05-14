@@ -134,7 +134,10 @@ function App() {
           </div>
           <div id="type-display">
             <p className="left">wave type: </p>
-            <p id="wave-type">SINE</p>
+            <div id="wrapper">
+              <div className="left"><p id="wave-type">SINE</p></div>
+              <div className="right"><a href="https://blake-d.github.io/web-oscillator-mobile/" target="_blank" rel="noreferrer">(launch mobile version)</a></div>
+            </div>
           </div>
         </div>
       </div>

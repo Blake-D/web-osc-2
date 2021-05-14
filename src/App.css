@@ -7,6 +7,11 @@ p{
     margin: 0px 0px 0px 0px;
 }
 
+a{
+    color: greenyellow;
+    font-size: 2vmin;
+}
+
 button{
     background-color: green;
     font-family: 'Press Start 2P', monospace;
@@ -64,6 +69,10 @@ button{
 
 .left{
     float: left;
+}
+
+.right{
+    float: right;
 }
 
 #top-wrap{
